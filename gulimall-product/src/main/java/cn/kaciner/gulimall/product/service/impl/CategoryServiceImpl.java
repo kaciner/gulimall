@@ -4,10 +4,7 @@ import cn.kaciner.common.exception.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -42,10 +39,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         //2.1 找到所有的一级分类
         List<CategoryEntity> level1Menus = entities.stream().filter((categoryEntity) ->
             categoryEntity.getParentCid() == 0
-        ).map((menu)->{
+        ).map((menu) -> {
             menu.setChildren(getChildrens(menu, entities));
             return menu;
-        }).sorted((menu1, menu2) ->  (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort())
+        }).sorted((menu1, menu2) ->  (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort())
         ).collect(Collectors.toList());
         return level1Menus;
     }
@@ -64,7 +61,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             return categoryEntity;
         }).sorted(Comparator.comparingInt(menu -> (Optional.ofNullable(menu.getSort()).orElse(0)))
         ).collect(Collectors.toList());
-
         return children;
     }
 
