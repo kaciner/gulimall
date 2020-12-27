@@ -1,10 +1,10 @@
-package cn.kaciner.gulimall.gateway;
+package cn.kaciner.mall.member;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class GulimallGatewayApplicationTests {
+public class MallMemberApplicationTests {
 
 	@Test
 	public void contextLoads() {
